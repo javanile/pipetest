@@ -65,6 +65,7 @@ assert_equals () {
     row=0
     expect=("$@")
     while read actual; do
+        echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
         if [[ "${actual}" != "${expect[${row}]}" ]]; then
             echo "Expected '${expect[${row}]}' found '${actual}'"
             pipetest_exit
@@ -72,6 +73,16 @@ assert_equals () {
         row=$((row+1))
     done
     echo "Assert output equals success"
+}
+
+##
+#
+##
+pipetest_name () {
+    if [[ ! -z "${PIPETEST_NAME}" ]]; then
+        echo "---> ${PIPETEST_NAME}"
+        PIPETEST_NAME=
+    fi
 }
 
 ##

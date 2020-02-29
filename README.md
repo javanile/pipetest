@@ -29,18 +29,27 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 ### `assert_file_exists`
 
-**Usage:**
+**Usage**
 
 ```bash
-assert_file_exists FILENAME
+assert_file_exists FILENAME [FAIL_MESSAGE] [SUCCESS_MESSAGE]
 ```
 
-**Examples:**
+**Examples**
 
 ```bash
-SAMPLE_FILE=sample_file.txt
-touch ${SAMPLE_FILE}
-assert_file_exists ${SAMPLE_FILE}
+touch sample_file.txt
+assert_file_exists sample_file.txt
+```
+
+```bash
+mv old_file_name.txt new_file_name.txt
+assert_file_exists new_file_name.txt "Moving file goes wrong."
+```
+
+```bash
+mv old_file_name.txt new_file_name.txt
+assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 ```
 
 <hr/>
