@@ -25,6 +25,8 @@ echo "Hello World!" | assert_equals "Hello World!"
 - `assert_directory_exists`: Check if directory exists
 - `assert_equals`: Check if stdout match as expected
 
+<hr/>
+
 ### `assert_file_exists`
 
 **Usage:**
