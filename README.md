@@ -1,11 +1,13 @@
 # pipetest
 
 ```bash
-echo "Hello World!" | php -r 'pipe_assert_equals("Hello World!");'
+source pipetest.sh
+
+echo "Hello World!" | assert_equals "Hello World!"
 ```
 
+## 
 
-```Dockerfile
-RUN echo "auto_prepend_file = /var/www/html/vendor/javanile/pipetest/pipetest.php;" \
-    > /usr/local/etc/php/conf.d/pipetest.ini
-```
+- [`assert_file_exists`](##assert_file_exists): Test if file exists
+- `assert_directory_exists`: Test if directory exists
+- `assert_equals`: Test if stdout match as expected
