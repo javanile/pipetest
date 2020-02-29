@@ -43,6 +43,8 @@ touch ${SAMPLE_FILE}
 assert_file_exists ${SAMPLE_FILE}
 ```
 
+<hr/>
+
 ## TL;DR
 
 > not now :-)
