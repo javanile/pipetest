@@ -3,5 +3,6 @@ set -e
 
 source pipetest.sh
 
-PIPETEST_NAME="Check if file exists"
-assert_file_exists test/fixtures/sample_file.txt | assert_equals "single line string"
+export PIPETEST_NAME="Check if file exists"
+assert_file_exists test/fixtures/sample_file.txt
+#| assert_equals "single line string"

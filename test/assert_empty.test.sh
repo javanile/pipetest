@@ -3,11 +3,10 @@ set -e
 
 source pipetest.sh
 
-pipetest "Empty stdout"
-expected="Asserting error: expected \"Hello World!\" actual is empty in test/assert_equals.test.sh:8"
-bash test/fixtures/empty.sh | assert_equals "Hello World!" | assert_equals "${expected}"
+pipetest "Empty stdout input"
+bash test/fixtures/empty.sh | assert_equals "Hello World!"
 
-pipetest "Empty string"
+pipetest "Empty string input"
 echo "" | assert_equals ""
 
 pipetest "Simple string"

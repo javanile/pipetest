@@ -63,26 +63,40 @@ assert_file_exists () {
 ##
 assert_equals () {
     row=0
-    expect=("$@")
+    SAVEIFS=$IFS
+    IFS=$'\n'
+    expect=($1)
+    IFS=$SAVEIFS
     while read actual; do
-        echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
+        #echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
         if [[ "${actual}" != "${expect[${row}]}" ]]; then
-            echo "Expected '${expect[${row}]}' found '${actual}'"
+            if [[ -z "$2" ]]; then
+                echo -n "Asserting error: expected \"${expect[${row}]}\" actual \"${actual}\" "
+            else
+                echo -n "$2 "
+            fi
+            echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"
             pipetest_exit
         fi
         row=$((row+1))
     done
-    echo "Assert output equals success"
+    if [[ "${row}" = "0" ]]; then
+        if [[ -z "$2" ]]; then
+            echo -n "Asserting error: expected \"$1\" actual is empty "
+        else
+            echo -n "$2 "
+        fi
+        echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"
+        pipetest_exit
+    fi
+    [[ -z "$3" ]] && echo "Exact match over ${row} line" || echo $3
 }
 
 ##
 #
 ##
-pipetest_name () {
-    if [[ ! -z "${PIPETEST_NAME}" ]]; then
-        echo "---> ${PIPETEST_NAME}"
-        PIPETEST_NAME=
-    fi
+pipetest () {
+    echo "---> $1"
 }
 
 ##
