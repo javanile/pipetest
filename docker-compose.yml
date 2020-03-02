@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  test:
+    build: .
+    command:
+      - ./test.sh
+    volumes:
+      - .:/lcov.sh

@@ -7,10 +7,16 @@ else
     UNAME := $(shell uname -s)
 endif
 
-install:
+install-lib:
 ifeq ($(UNAME),Darwin)
-	brew install gnu-getopt lcov
+	@brew install gnu-getopt lcov
 endif
 
+install-dev:
+	@curl -sLO https://git.io/lcov.sh
+
+install: install-lib install-dev
+
 test:
-	bash lcov.sh test/*.test.sh
+	@bash lcov.sh test/*.test.sh -x lcov.sh
+

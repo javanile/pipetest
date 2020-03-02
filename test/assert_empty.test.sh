@@ -3,7 +3,7 @@ set -e
 
 source pipetest.sh
 
-pipetest "Empty stdout input"
+pipetest "Empty stdout"
 bash test/fixtures/empty.sh | assert_equals "Hello World!"
 
 pipetest "Empty string input"
