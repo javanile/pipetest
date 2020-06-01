@@ -15,7 +15,7 @@ endif
 install-dev:
 	@curl -sLO https://git.io/lcov.sh
 
-install: install-lib install-dev
+#install: install-lib install-dev
 
 test:
 	@bash lcov.sh test/*.test.sh -x lcov.sh
