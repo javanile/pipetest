@@ -2,5 +2,5 @@
   "name": "pipetest",
   "version": "0.0.1",
   "description": "A simple and lightweight set of bash functions useful to implement assertions",
-  "scripts": ["pipetest.sh"]
+  "files": ["pipetest.sh"]
 }
