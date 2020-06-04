@@ -107,5 +107,12 @@ pipetest_exit () {
 # If input is provided by STDIN
 ##
 if [[ ! -z "${PIPETEST_STDIN}" ]]; then
-    $1 "${@:2}"
+    if [[ -z "${1}" ]]; then
+        echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
+        exit 1
+    elif [[ "${1}" = "--version" ]]; then
+        echo "Pipetest ${VERSION} (${0})"
+        exit 0
+    fi
+    "${1}" "${@:2}"
 fi
