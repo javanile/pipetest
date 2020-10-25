@@ -66,14 +66,17 @@ assert_file_exists () {
 ##
 assert_equals () {
     local row=0
-    declare -a expect
-    while read -r line; do
+    local expect
+    echo "$1" | while read -r line; do
+      echo "L $line"
       expect[${row}]="$line"
+      echo "11 $row ${expect[${row}]}"
       row=$((row+1))
     done
+    echo "EXP ${expect[0]}"
     row=0
     while read actual; do
-        #echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
+        echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
         if [[ "${actual}" != "${expect[${row}]}" ]]; then
             if [[ -z "$2" ]]; then
                 echo -n "Asserting error: expected \"${expect[${row}]}\" actual \"${actual}\" "
