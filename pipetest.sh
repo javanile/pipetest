@@ -38,9 +38,15 @@ if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
 fi
 
 ##
+# Assert if directory exists
 #
+# Arguments
+#  - $1: Directory name
+# Output
+#  - if directory not exists print an error message
+#  - else newline
 ##
-assert_directory_exists () {
+assert_directory_exists() {
     if [[ ! -d "$1" ]]; then
         echo "Directory '$1' does not exists."
         pipetest_exit
@@ -62,11 +68,13 @@ assert_file_exists () {
 #
 ##
 assert_equals () {
+    local row=0
+    declare -a expect
+    while read -r line; do
+      expect[${row}]="$line"
+      row=$((row+1))
+    done
     row=0
-    SAVEIFS=$IFS
-    IFS=$'\n'
-    expect=($1)
-    IFS=$SAVEIFS
     while read actual; do
         #echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
         if [[ "${actual}" != "${expect[${row}]}" ]]; then
