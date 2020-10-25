@@ -29,12 +29,9 @@
 [[ -z "${LCOV_DEBUG}" ]] || set -x
 
 VERSION="0.1.0"
-
-## Prevent direct file access
+PIPETEST_STDIN=
 if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
-    echo "[ERROR] Pipetest MUST be sourced!"
-    echo " >>> Use 'source pipetest.sh' into your BASH script."
-    exit 1
+    PIPETEST_STDIN=true
 fi
 
 ##
@@ -83,7 +80,7 @@ assert_equals () {
             else
                 echo -n "$2 "
             fi
-            echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"
+            [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
             pipetest_exit
         fi
         row=$((row+1))
@@ -94,7 +91,7 @@ assert_equals () {
         else
             echo -n "$2 "
         fi
-        echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}"
+        [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
         pipetest_exit
     fi
     [[ -z "$3" ]] && echo "Exact match over ${row} line" || echo $3
@@ -113,3 +110,17 @@ pipetest () {
 pipetest_exit () {
     exit 1
 }
+
+##
+# If input is provided by STDIN
+##
+if [[ ! -z "${PIPETEST_STDIN}" ]]; then
+    if [[ -z "${1}" ]]; then
+        echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
+        exit 1
+    elif [[ "${1}" = "--version" ]]; then
+        echo "Pipetest ${VERSION} (${0})"
+        exit 0
+    fi
+    "${1}" "${@:2}"
+fi
