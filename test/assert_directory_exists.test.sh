@@ -2,4 +2,4 @@
 
 source ./test/testcase.sh
 
-echo "single line string" | assert_equals "single line string"
+echo ${conf_file} | assert_file_exists

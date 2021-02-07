@@ -26,6 +26,8 @@
 # SOFTWARE.
 ##
 
+set -e
+
 [[ -z "${LCOV_DEBUG}" ]] || set -x
 
 VERSION="0.1.0"
@@ -44,86 +46,98 @@ fi
 #  - else newline
 ##
 assert_directory_exists() {
-    if [[ ! -d "$1" ]]; then
-        echo "Directory '$1' does not exists."
-        pipetest_exit
-    fi
-    echo ""
+  if [[ ! -d "$1" ]]; then
+    echo "Directory '$1' does not exists."
+    exit 1
+  fi
+  echo ""
 }
 
 ##
 #
 ##
 assert_file_exists () {
-    if [[ ! -f "$1" ]]; then
-        echo "File '$1' does not exists."
-        pipetest_exit
-    fi
+  if [[ ! -f "$1" ]]; then
+    echo "File '$1' does not exists."
+    exit 1
+  fi
 }
 
 ##
 #
 ##
 assert_equals () {
-    local row=0
-    local expect
-    echo "$1" | while read -r line; do
-      echo "L $line"
-      expect[${row}]="$line"
-      echo "11 $row ${expect[${row}]}"
-      row=$((row+1))
-    done
-    echo "EXP ${expect[0]}"
-    row=0
-    while read actual; do
-        echo "DIFF(${row}): ${actual} <-> ${expect[${row}]}"
-        if [[ "${actual}" != "${expect[${row}]}" ]]; then
-            if [[ -z "$2" ]]; then
-                echo -n "Asserting error: expected \"${expect[${row}]}\" actual \"${actual}\" "
-            else
-                echo -n "$2 "
-            fi
-            [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
-            pipetest_exit
-        fi
-        row=$((row+1))
-    done
-    if [[ "${row}" = "0" ]]; then
-        if [[ -z "$2" ]]; then
-            echo -n "Asserting error: expected \"$1\" actual is empty "
-        else
-            echo -n "$2 "
-        fi
-        [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
-        pipetest_exit
+  local actual_row=0
+  local expect_row=0
+
+  declare -a expect
+  while read -r line; do
+    expect[${expect_row}]="${line}"
+    ((expect_row++))
+  done < <(echo "$1") && true
+
+  while read actual; do
+    echo "DIFF[${actual_row}]: ${actual} <-> ${expect[${actual_row}]}"
+    if [[ "${actual}" != "${expect[${actual_row}]}" ]]; then
+      if [[ -z "$2" ]]; then
+          echo -n "Asserting error: expected \"${expect[${actual_row}]}\" actual \"${actual}\" "
+      else
+          echo -n "$2 "
+      fi
+      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      exit 1
     fi
-    [[ -z "$3" ]] && echo "Exact match over ${row} line" || echo $3
-}
+    ((actual_row++))
+  done && true
 
-##
-#
-##
-pipetest () {
-    echo "---> $1"
-}
-
-##
-#
-##
-pipetest_exit () {
+  if [[ "${actual_row}" = "0" ]]; then
+    if [[ -z "$2" ]]; then
+      echo -n "Asserting error: expected \"$1\" actual is empty "
+    else
+      echo -n "$2 "
+    fi
+    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
     exit 1
+  fi
+
+  [[ -z "$3" ]] && echo "Exact match over ${actual_row} line" || echo $3
+}
+
+##
+#
+##
+assert_empty() {
+  local actual_row=0
+
+  while read actual; do
+    if [[ -n "${actual}" ]]; then
+      echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
+      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      exit 1
+    fi
+  done && true
+
+#  echo "AR: ${actual_row}"
+
+  if [[ "${actual_row}" != "0" ]]; then
+    echo -n "Asserting error: expected empty actual is \"${actual}\" "
+    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+    exit 1
+  fi
+
+  [[ -z "$1" ]] && echo "Found empty value as expected" || echo $1
 }
 
 ##
 # If input is provided by STDIN
 ##
 if [[ ! -z "${PIPETEST_STDIN}" ]]; then
-    if [[ -z "${1}" ]]; then
-        echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
-        exit 1
-    elif [[ "${1}" = "--version" ]]; then
-        echo "Pipetest ${VERSION} (${0})"
-        exit 0
-    fi
-    "${1}" "${@:2}"
+  if [[ -z "${1}" ]]; then
+    echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
+    exit 1
+  elif [[ "${1}" = "--version" ]]; then
+    echo "Pipetest ${VERSION} (${0})"
+    exit 0
+  fi
+  "${1}" "${@:2}"
 fi

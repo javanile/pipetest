@@ -17,6 +17,14 @@ install-dev:
 
 #install: install-lib install-dev
 
+## =======
+## Testing
+## =======
 test:
 	@bash lcov.sh test/*.test.sh -x lcov.sh
 
+test-assert-empty:
+	@bash test/assert_empty.test.sh
+
+test-assert-equals:
+	@bash test/assert_equals.test.sh

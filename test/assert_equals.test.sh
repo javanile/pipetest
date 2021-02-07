@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-source pipetest.sh
+trap 'fail' ERR
 
-pipetest "Empty stdout"
+source ./pipetest.sh
+source ./test/functions.sh
+
+test "Empty stdout"
 expected="Asserting error: expected \"Hello World!\" actual is empty in test/assert_equals.test.sh:8"
-bash test/fixtures/empty.sh | assert_equals "Hello World!" | assert_equals "${expected}"
+bash test/fixtures/empty.sh | assert_equals "Hello World!" # | assert_equals "${expected}"
 
-pipetest "Empty string"
+exit
+
+test "Empty string"
 echo "" | assert_equals ""
 
-pipetest "Simple string"
+test "Simple string"
 echo "Hello World!" | assert_equals "Hello World!"
 
-pipetest "Simple multi-line string"
+test "Simple multi-line string"
 echo -e "Hello\nWorld" | assert_equals "$(cat << EOF
 Hello
 World
@@ -25,14 +30,14 @@ World
 EOF
 )"
 
-pipetest "Default fail message on equals"
+test "Default fail message on equals"
 echo "A" | assert_equals "B" | assert_equals "Asserting error: expected \"B\" actual \"A\" in test/assert_equals.test.sh:22"
 
-pipetest "Default success message on equals"
+test "Default success message on equals"
 echo "A" | assert_equals "A" | assert_equals "Exact match over 1 line"
 
-pipetest "Custom fail message on equals"
+test "Custom fail message on equals"
 echo "A" | assert_equals "B" "FAIL" | assert_equals "FAIL in test/assert_equals.test.sh:28"
 
-pipetest "Custom success message on equals"
+test "Custom success message on equals"
 echo "A" | assert_equals "A" "FAIL" "SUCCESS" | assert_equals "SUCCESS"
