@@ -65,3 +65,13 @@ curl -i "https://git.io" \
      -F "url=https://raw.githubusercontent.com/javanile/lcov.sh/master/lcov.sh" \
      -F "code=lcov.sh"
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md in the repo](https://github.com/asdf-vm/asdf/blob/master/CONTRIBUTING.md) or the [Contributing section on the docs site](http://asdf-vm.github.io/asdf/#/contributing-core-asdf).
+
+## Community & Questions
+
+- [![GitHub Issues](https://icongr.am/simple/github.svg?color=808080&size=16) GitHub Issues](https://github.com/javanile/pipetest/issues): report a bug or raise a feature request to the `pipetest` core team
+- [![GitHub Discussions](https://icongr.am/simple/github.svg?color=808080&size=16) GitHub Discussions](https://github.com/javanile/pipetest/discussions): our preferred method for community Q&A and interaction
+- [![StackOverflow Tag](https://icongr.am/fontawesome/stack-overflow.svg?size=16&color=808080) StackOverflow Tag](https://stackoverflow.com/questions/tagged/bash+unit-testing): see existing Q&A for `BASH` and `Unit Testing`. Some of the core team watch this tag in addition to our helpful community
