@@ -16,6 +16,7 @@ This makes Pipetest suitable for the following scenarios
 - Ansible Playbooks
 - Automated Testing
 - Data Processing
+- `build-release.sh | assert_equals "done."`
 
 ## Get started
 
