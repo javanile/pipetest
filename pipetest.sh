@@ -37,30 +37,28 @@ if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
 fi
 
 ##
-# Assert if directory exists
-#
-# Arguments
-#  - $1: Directory name
-# Output
-#  - if directory not exists print an error message
-#  - else newline
+# Check if pipe input is empty.
 ##
-assert_directory_exists() {
-  if [[ ! -d "$1" ]]; then
-    echo "Directory '$1' does not exists."
-    exit 1
-  fi
-  echo ""
-}
+assert_empty() {
+  local actual_row=0
 
-##
-#
-##
-assert_file_exists () {
-  if [[ ! -f "$1" ]]; then
-    echo "File '$1' does not exists."
+  while read actual; do
+    if [[ -n "${actual}" ]]; then
+      echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
+      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      exit 1
+    fi
+  done && true
+
+#  echo "AR: ${actual_row}"
+
+  if [[ "${actual_row}" != "0" ]]; then
+    echo -n "Asserting error: expected empty actual is \"${actual}\" "
+    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
     exit 1
   fi
+
+  [[ -z "$1" ]] && echo "Found empty value as expected" || echo $1
 }
 
 ##
@@ -103,29 +101,36 @@ assert_equals () {
   [[ -z "$3" ]] && echo "Exact match over ${actual_row} line" || echo $3
 }
 
+
 ##
 #
 ##
-assert_empty() {
-  local actual_row=0
-
-  while read actual; do
-    if [[ -n "${actual}" ]]; then
-      echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
-      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
-      exit 1
-    fi
-  done && true
-
-#  echo "AR: ${actual_row}"
-
-  if [[ "${actual_row}" != "0" ]]; then
-    echo -n "Asserting error: expected empty actual is \"${actual}\" "
-    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+assert_file_exists () {
+  if [[ ! -f "$1" ]]; then
+    echo "File '$1' does not exists."
     exit 1
   fi
+}
 
-  [[ -z "$1" ]] && echo "Found empty value as expected" || echo $1
+##
+# Assert if directory exists
+#
+# Arguments
+#  - $1: Directory name
+# Output
+#  - if directory not exists print an error message
+#  - else newline
+##
+assert_directory_exists() {
+  while read actual; do
+    echo "DIFF[${actual_row}]: ${actual} <-> ${expect[${actual_row}]}"
+  done && true
+
+  if [ ! -d "$1" ]; then
+    echo "Directory '$1' does not exists."
+    exit 1
+  fi
+  echo ""
 }
 
 ##
