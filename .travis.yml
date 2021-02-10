@@ -1,21 +1,17 @@
 os: linux
 group: stable
 dist: trusty
-sudo: required
 language: generic
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.22.0
+  - SHELL=bash:4
+  - SHELL=bash:5
 
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker-compose --version
+  - bash <(curl -sL https://git.io/get-docker-compose)
 
 script:
-  - docker-compose run --rm test
+  - make test-travis
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

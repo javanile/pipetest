@@ -23,6 +23,9 @@ install-dev:
 test:
 	@bash lcov.sh test/*.test.sh -x lcov.sh
 
+test-travis:
+	@docker-compose -f test/travis/docker-compose.yml run --rm travis test/travis/test-runner.sh
+
 test-assert-empty:
 	@bash test/assert_empty.test.sh
 
