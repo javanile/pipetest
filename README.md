@@ -20,7 +20,7 @@ This makes Pipetest suitable for the following scenarios
 In other words, everything that can refer to this
 
 ```bash
-build-something.sh | assert_equals "done."`
+./build-something.sh | assert_equals "done."`
 ```
 
 ## Get Started
