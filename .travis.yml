@@ -9,9 +9,10 @@ env:
 
 before_install:
   - bash <(curl -sL https://git.io/get-docker-compose)
+  - make travis-pull
 
 script:
-  - make test-travis
+  - make travis-test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
