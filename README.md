@@ -1,5 +1,6 @@
 # Pipetest
 
+[![Build Status](https://travis-ci.com/javanile/pipetest.svg?branch=main)](https://travis-ci.com/javanile/pipetest)
 ![BASH](https://img.shields.io/badge/BASH-4%20%7C%205-lightgrey)
 
 Pipetest is a simple an lightweight set of BASH functions useful to implement assertions with [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html). 
