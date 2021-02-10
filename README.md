@@ -16,11 +16,16 @@ This makes Pipetest suitable for the following scenarios
 - Ansible Playbooks
 - Automated Testing
 - Data Processing
-- `build-release.sh | assert_equals "done."`
 
-## Get started
+In other words, everything that can refer to this
 
-Easy to install, simply download the file `pipetest.sh` into your project then load as source into your script.
+```
+build-something.sh | assert_equals "done."`
+```
+
+## Get Started
+
+Pipetest is just one file, put the file `pipetest.sh` into your project then load as source into your script.
 
 ## Installation
 
