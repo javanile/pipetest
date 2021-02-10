@@ -56,7 +56,7 @@ echo "Hello World!" | assert_equals "Hello World!"
 **Usage**
 
 ```bash
-assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
+... | assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
 ```
 
 **Examples**
