@@ -3,7 +3,7 @@
 ##
 # Pipetest
 #
-# The best testing framework around BASH projects.
+# Assertions through pipe chaining.
 #
 # Copyright (c) 2020 Francesco Bianco <bianco@javanile.org>
 #
