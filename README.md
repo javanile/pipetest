@@ -1,6 +1,8 @@
 # Pipetest
 
-Pipetest is a simple an lightweight set of bash functions useful to implement assertions on your script or modern test suites. 
+![BASH](https://img.shields.io/badge/BASH-4%20%7C%205-lightgrey)
+
+Pipetest is a simple an lightweight set of BASH functions useful to implement assertions with the strength of [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html). 
 
 ## Get started
 
