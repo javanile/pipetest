@@ -4,5 +4,7 @@ services:
   travis:
     image: ${DOCKER_SHELL:-bash}
     working_dir: /pipetest
+    environment:
+      - DOCKER_SHELL=${DOCKER_SHELL:-bash}
     volumes:
       - ../..:/pipetest
