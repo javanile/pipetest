@@ -4,7 +4,6 @@ set -e
 trap 'fail' ERR
 
 source ./pipetest.sh
-source ./test/functions.sh
 
 test "Empty stdout"
 expected="Asserting error: expected \"Hello World!\" actual is empty in test/assert_equals.test.sh:8"

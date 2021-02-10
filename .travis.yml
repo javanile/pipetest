@@ -4,9 +4,6 @@ dist: trusty
 language: generic
 
 env:
-  - DOCKER_SHELL=williamyeh/dash
-  - DOCKER_SHELL=busybox:1.32.1
-  - DOCKER_SHELL=alpine
   - DOCKER_SHELL=bash:4
   - DOCKER_SHELL=bash:5
   - DOCKER_SHELL=zshusers/zsh:5.6

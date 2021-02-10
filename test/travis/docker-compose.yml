@@ -2,9 +2,10 @@ version: '3'
 
 services:
   travis:
-    image: ${DOCKER_SHELL:-bash}
+    image: ${DOCKER_SHELL:-bash:5}
     working_dir: /pipetest
+    command: /pipetest/test/travis/test-runner.sh
     environment:
-      - DOCKER_SHELL=${DOCKER_SHELL:-bash}
+      - DOCKER_SHELL=${DOCKER_SHELL:-bash:5}
     volumes:
       - ../..:/pipetest

@@ -29,11 +29,14 @@ test-assert-empty:
 test-assert-equals:
 	@bash test/assert_equals.test.sh
 
+test-posix:
+	@bash test/posix/test-runner.sh
+
 ## =====
 ## CI/CD
 ## =====
 travis-pull:
-	@docker-compose -f test/travis/docker-compose.yml pull > /dev/null
+	@docker-compose -f test/travis/docker-compose.yml pull
 
 travis-test:
-	@docker-compose -f test/travis/docker-compose.yml run --rm travis test/travis/test-runner.sh
+	@docker-compose -f test/travis/docker-compose.yml run --rm travis
