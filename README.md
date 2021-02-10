@@ -19,8 +19,8 @@ This makes Pipetest suitable for the following scenarios
 
 In other words, everything that can refer to this
 
-```
-build-something.sh | assert_equals "done."`
+```bash
+./build-something.sh | assert_equals "done."`
 ```
 
 ## Get Started
