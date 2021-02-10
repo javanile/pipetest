@@ -2,11 +2,11 @@
 set -e
 
 if command -v apk &> /dev/null; then
-  apk add make
+  apk --quiet add make
 fi
 
 echo "========================================"
-bash --version
+${SHELL} --version
 echo "========================================"
 
-make test-bats
+make test

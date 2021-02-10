@@ -4,8 +4,12 @@ dist: trusty
 language: generic
 
 env:
-  - SHELL=bash:4
-  - SHELL=bash:5
+  - DOCKER_SHELL=alpine:1
+  - DOCKER_SHELL=alpine:2
+  - DOCKER_SHELL=alpine:3
+  - DOCKER_SHELL=bash:4
+  - DOCKER_SHELL=bash:5
+  - DOCKER_SHELL=zshusers/zsh:5
 
 before_install:
   - bash <(curl -sL https://git.io/get-docker-compose)

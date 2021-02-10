@@ -2,7 +2,7 @@ version: '3'
 
 services:
   travis:
-    image: ${SHELL:-bash}
+    image: ${DOCKER_SHELL:-bash}
     working_dir: /pipetest
     volumes:
       - ../..:/pipetest
