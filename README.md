@@ -44,10 +44,12 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 ## Documentation 
 
-- [`assert_empty`](#assert_empty) check if stdout match as expected
-- [`assert_equals`](#assert_equals) check if stdout match as expected
-- [`assert_file_exists`](#assert_file_exists) check if file exists
-- [`assert_directory_exists`](#assert_directory_exists) check if directory exists
+| Function | Description |
+| --- | --- |
+| [`assert_empty`](#assert_empty) | check if stdout match as expected |
+| [`assert_equals`](#assert_equals) | check if stdout match as expected |
+| [`assert_file_exists`](#assert_file_exists) | check if file exists |
+| [`assert_directory_exists`](#assert_directory_exists) | check if directory exists |
 
 <hr/>
 
