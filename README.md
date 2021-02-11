@@ -51,12 +51,12 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 <hr/>
 
-### `assert_empty`
+### ➡ | `assert_empty`
 
 **Usage**
 
 ```bash
-assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
+... | assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
 ```
 
 **Examples**
@@ -75,7 +75,7 @@ cat apache2.log | assert_empty
 
 <hr/>
 
-### `assert_file_exists`
+### ➡ | `assert_file_exists`
 
 **Usage**
 
@@ -102,7 +102,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_file_exists`
+### ➡ | `assert_file_exists`
 
 **Usage**
 
@@ -129,7 +129,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_file_exists`
+### ➡ | `assert_file_exists`
 
 **Usage**
 
@@ -156,7 +156,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_file_exists`
+### ➡ | `assert_directory_exists`
 
 **Usage**
 
