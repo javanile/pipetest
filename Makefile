@@ -23,6 +23,9 @@ install-dev:
 test:
 	@bash test/assert_equals.test.sh
 
+test-assert-directory-exists:
+	@bash test/assert_directory_exists.test.sh
+
 test-assert-empty:
 	@bash test/assert_empty.test.sh
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
+set -e
 
-source ./test/testcase.sh
+source ./pipetest.sh
 
-echo ${conf_file} | assert_file_exists
+echo test/fixtures | assert_directory_exists
