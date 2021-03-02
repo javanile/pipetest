@@ -31,10 +31,8 @@ set -e
 [[ -f "${LCOV_DEBUG}" ]] && set -x
 
 VERSION="0.1.0"
-PIPETEST_STDIN=
-if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
-    PIPETEST_STDIN=1
-fi
+SOURCED="${BASH_SOURCE[0]}"
+[[ "${SOURCED}" = "$0" ]] && SOURCED=
 
 ##
 # Check if pipe input is empty.
@@ -240,13 +238,26 @@ assert_failure() {
 ##
 # If input is provided by STDIN
 ##
-if [[ -n "${PIPETEST_STDIN}" ]]; then
-  if [[ -z "${1}" ]]; then
-    echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
-    exit 1
-  elif [[ "${1}" = "--version" ]]; then
-    echo "Pipetest ${VERSION} (${0})"
-    exit 0
-  fi
-  "${1}" "${@:2}"
+if [[ -n "${SOURCED}" ]]; then
+  export -f assert_empty
+  export -f assert_not_empty
+  export -f assert_equals
+  export -f assert_not_equals
+  export -f assert_file_exists
+  export -f assert_file_not_exists
+  export -f assert_directory_exists
+  export -f assert_directory_not_exists
+else
+  case ${1} in
+    assert_empty) assert_empty "${@:2}" ;;
+    assert_not_empty) assert_not_empty "${@:2}" ;;
+    assert_equals) assert_equals "${@:2}" ;;
+    assert_not_equals) assert_not_equals "${@:2}" ;;
+    assert_file_exists) assert_file_exists "${@:2}" ;;
+    assert_file_not_exists) assert_file_not_exists "${@:2}" ;;
+    assert_directory_exists) assert_directory_exists "${@:2}" ;;
+    assert_directory_not_exists) assert_directory_not_exists "${@:2}" ;;
+    --version) echo "Pipetest ${VERSION} (${0})" ;;
+    *) echo "Syntax error: require assert directive (eg. ... | pipetest.sh assert_equals)" ;;
+  esac
 fi
