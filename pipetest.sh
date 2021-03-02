@@ -172,7 +172,7 @@ assert_not_equals () {
 assert_file_exists () {
   local failure_message="$1"
   [[ -z "$1" ]] && local failure_message="File '{}' does not exists."
-  assert_exists file "$1" "$2"
+  assert_exists file "${failure_message}" "$2"
 }
 
 ##
@@ -187,7 +187,7 @@ assert_file_exists () {
 assert_directory_exists() {
   local failure_message="$1"
   [[ -z "$1" ]] && local failure_message="Directory '{}' does not exists."
-  assert_exists directory "$1" "$2"
+  assert_exists directory "${failure_message}" "$2"
 }
 
 ##
