@@ -28,12 +28,12 @@
 
 set -e
 
-[[ -z "${LCOV_DEBUG}" ]] || set -x
+[[ -f "${LCOV_DEBUG}" ]] && set -x
 
 VERSION="0.1.0"
 PIPETEST_STDIN=
 if [[ "${BASH_SOURCE[0]}" = "${0}" ]]; then
-    PIPETEST_STDIN=true
+    PIPETEST_STDIN=1
 fi
 
 ##
@@ -42,7 +42,7 @@ fi
 assert_empty() {
   local actual_row=0
 
-  while read actual; do
+  while read -r actual; do
     if [[ -n "${actual}" ]]; then
       echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
       [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
@@ -58,7 +58,32 @@ assert_empty() {
     exit 1
   fi
 
-  [[ -z "$1" ]] && echo "Found empty value as expected" || echo $1
+  [[ -z "$1" ]] && echo "Found empty value as expected" || echo "$1"
+}
+
+##
+# Check if pipe input is empty.
+##
+assert_not_empty() {
+  local actual_row=0
+
+  while read -r actual; do
+    if [[ -n "${actual}" ]]; then
+      echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
+      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      exit 1
+    fi
+  done && true
+
+#  echo "AR: ${actual_row}"
+
+  if [[ "${actual_row}" != "0" ]]; then
+    echo -n "Asserting error: expected empty actual is \"${actual}\" "
+    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+    exit 1
+  fi
+
+  [[ -z "$1" ]] && echo "Found empty value as expected" || echo "$1"
 }
 
 ##
@@ -74,7 +99,7 @@ assert_equals () {
     ((expect_row++))
   done < <(echo "$1") && true
 
-  while read actual; do
+  while read -r actual; do
     echo "DIFF[${actual_row}]: ${actual} <-> ${expect[${actual_row}]}"
     if [[ "${actual}" != "${expect[${actual_row}]}" ]]; then
       if [[ -z "$2" ]]; then
@@ -98,18 +123,71 @@ assert_equals () {
     exit 1
   fi
 
-  [[ -z "$3" ]] && echo "Exact match over ${actual_row} line" || echo $3
+  [[ -z "$3" ]] && echo "Exact match over ${actual_row} line" || echo "$3"
 }
 
+##
+#
+##
+assert_not_equals () {
+  local actual_row=0
+  local expect_row=0
+
+  declare -a expect
+  while read -r line; do
+    expect[${expect_row}]="${line}"
+    ((expect_row++))
+  done < <(echo "$1") && true
+
+  while read -r actual; do
+    echo "DIFF[${actual_row}]: ${actual} <-> ${expect[${actual_row}]}"
+    if [[ "${actual}" != "${expect[${actual_row}]}" ]]; then
+      if [[ -z "$2" ]]; then
+          echo -n "Asserting error: expected \"${expect[${actual_row}]}\" actual \"${actual}\" "
+      else
+          echo -n "$2 "
+      fi
+      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      exit 1
+    fi
+    ((actual_row++))
+  done && true
+
+  if [[ "${actual_row}" = "0" ]]; then
+    if [[ -z "$2" ]]; then
+      echo -n "Asserting error: expected \"$1\" actual is empty "
+    else
+      echo -n "$2 "
+    fi
+    [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+    exit 1
+  fi
+
+  [[ -z "$3" ]] && echo "Exact match over ${actual_row} line" || echo "$3"
+}
 
 ##
 #
 ##
 assert_file_exists () {
-  if [[ ! -f "$1" ]]; then
-    echo "File '$1' does not exists."
-    exit 1
-  fi
+  local failure_message="$1"
+  [[ -z "$1" ]] && local failure_message="File '{}' does not exists."
+  assert_exists file "$1" "$2"
+}
+
+##
+# Assert if file exists
+#
+# Arguments
+#  - $1: Directory name
+# Output
+#  - if directory not exists print an error message
+#  - else newline
+##
+assert_directory_exists() {
+  local failure_message="$1"
+  [[ -z "$1" ]] && local failure_message="Directory '{}' does not exists."
+  assert_exists directory "$1" "$2"
 }
 
 ##
@@ -121,22 +199,48 @@ assert_file_exists () {
 #  - if directory not exists print an error message
 #  - else newline
 ##
-assert_directory_exists() {
-  while read actual; do
-    echo "DIFF[${actual_row}]: ${actual} <-> ${expect[${actual_row}]}"
+assert_exists() {
+  local input=
+  local actual_count=0
+  local expect_count=0
+  while read -r actual; do
+    actual=$(echo "${actual}" | xargs)
+    [[ -z "${actual}" ]] && continue
+    case "$1" in
+      file)      [[ -f "${actual}" ]] && ((actual_count++)) || input="${actual}" ;;
+      directory) [[ -d "${actual}" ]] && ((actual_count++)) || input="${actual}" ;;
+    esac
+    ((expect_count++))
   done && true
 
-  if [ ! -d "$1" ]; then
-    echo "Directory '$1' does not exists."
-    exit 1
+  if [[ ${expect_count} -eq 0 ]]; then
+    echo "No input data was detected" && exit 1
+  elif [[ ${actual_count} -lt ${expect_count} ]]; then
+    assert_failure "${input}" "$2" "Directory '{}' does not exists."
+  else
+    assert_success "$3"
   fi
-  echo ""
+}
+
+##
+#
+##
+assert_success() {
+  [[ -n "$1" ]] && echo "$1"
+}
+
+##
+#
+##
+assert_failure() {
+  [[ -n "$2" ]] && echo "${2//\{\}/$1}" || echo "${3//\{\}/$1}"
+  exit 1
 }
 
 ##
 # If input is provided by STDIN
 ##
-if [[ ! -z "${PIPETEST_STDIN}" ]]; then
+if [[ -n "${PIPETEST_STDIN}" ]]; then
   if [[ -z "${1}" ]]; then
     echo "Use one of the Pipetest assert directive as first argument (eg. pipetest assert_equals)"
     exit 1

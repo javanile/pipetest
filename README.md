@@ -45,9 +45,39 @@ echo "Hello World!" | assert_equals "Hello World!"
 ## Documentation 
 
 - [`assert_empty`](#assert_empty)
+- [`assert_not_empty`](#assert_not_empty)
 - [`assert_equals`](#assert_equals)
+- [`assert_not_equals`](#assert_not_equals)
 - [`assert_file_exists`](#assert_file_exists)
+- [`assert_file_not_exists`](#assert_file_not_exists)
 - [`assert_directory_exists`](#assert_directory_exists)
+- [`assert_directory_not_exists`](#assert_directory_not_exists)
+
+<hr/>
+
+### ➡ | `assert_empty`
+
+**Usage**
+
+```bash
+... | assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
+```
+
+**Examples**
+
+```bash
+## Expeting stdin is empty
+echo "" | assert_empty
+```
+
+```bash
+## 
+ls | assert_empty "Current directory is empty"
+```
+
+```bash
+cat apache2.log | assert_empty
+```
 
 <hr/>
 
