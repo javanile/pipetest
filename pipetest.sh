@@ -43,7 +43,7 @@ assert_empty() {
   while read -r actual; do
     if [[ -n "${actual}" ]]; then
       echo -n "Asserting error: expected empty input, actual contains \"${actual}\" "
-      [[ -z "${PIPETEST_STDIN}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
+      [[ -n "${SOURCED}" ]] && echo "in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}" || echo "from STDIN"
       exit 1
     fi
   done && true
