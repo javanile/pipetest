@@ -55,7 +55,7 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 <hr/>
 
-### ➡ | `assert_empty`
+### ` ➡ | assert_empty`
 
 **Usage**
 
