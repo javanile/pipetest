@@ -30,7 +30,7 @@ Pipetest is just one file, put the file `pipetest.sh` into your project then loa
 ## Installation
 
 ```bash
-$ curl -sL https://git.io/pipetest.sh
+$ curl -o pipetest.sh https://raw.githubusercontent.com/javanile/pipetest/main/pipetest.sh
 ```
 
 ```bash
@@ -44,7 +44,7 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 ## Documentation 
 
-- [`assert_empty`](#assert_empty)
+- [`assert_empty`](#assert_empty) - 
 - [`assert_not_empty`](#assert_not_empty)
 - [`assert_equals`](#assert_equals)
 - [`assert_not_equals`](#assert_not_equals)
@@ -55,7 +55,13 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 <hr/>
 
-###  ... | assert_empty
+<div align="center">
+
+### `assert_empty`
+
+</div>
+
+Check if 
 
 **Usage**
 
@@ -78,6 +84,8 @@ ls | assert_empty "Current directory is empty"
 ```bash
 cat apache2.log | assert_empty
 ```
+
+[[back to top ☝]](#documentation)
 
 <hr/>
 
