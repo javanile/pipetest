@@ -1,4 +1,4 @@
-# Pipetest
+# ⛲ Pipetest
 
 [![Build Status](https://travis-ci.com/javanile/pipetest.svg?branch=main)](https://travis-ci.com/javanile/pipetest)
 ![BASH](https://img.shields.io/badge/BASH-4%20%7C%205-lightgrey)
