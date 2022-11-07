@@ -30,7 +30,7 @@ Pipetest is just one file, put the file `pipetest.sh` into your project then loa
 ## Installation
 
 ```bash
-$ curl -o pipetest.sh https://raw.githubusercontent.com/javanile/pipetest/main/pipetest.sh
+$ curl -o pipetest.sh https://github.com/javanile/pipetest/releases/download/v0.1.0/pipetest.sh
 ```
 
 ```bash
