@@ -23,7 +23,7 @@ In other words, everything that can refer to this
 ./build-something.sh | assert_equals "done."`
 ```
 
-## Suppoerted shell
+## Suppoerted Shells
 
 We try to do everything possible to ensure maximum compatibility with these platforms
 
@@ -102,7 +102,7 @@ ls | assert_empty "Current directory is not empty"
 cat apache2.log | assert_empty "Log file is not empty"
 ```
 
-[[back to top]](#documentation)
+<div align="right">[[back to top]](#documentation)</div>
 
 <hr/>
 
