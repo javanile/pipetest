@@ -65,7 +65,9 @@ There are the lists of supported functions
 - [**assert_equals**](#assert_equals) - Fails if piped output not match with the argument
 - [**assert_not_equals**](#assert_not_equals) - Fails if piped output match with the argument 
 - [**assert_starts_with**](#assert_starts_with) - Fails if piped output match with the argument
+- [**assert_each_line_starts_with**](#assert_each_line_starts_with) - Fails if piped output match with the argument
 - [**assert_ends_with**](#assert_ends_with) - Fails if piped output match with the argument
+- [**assert_each_line_ends_with**](#assert_ends_with) - Fails if piped output match with the argument
 - [**assert_match**](#assert_match) - Fails if piped output match with the argument
 - [**assert_file_exists**](#assert_file_exists) - Fails if piped file name as text not exists
 - [**assert_file_not_exists**](#assert_file_not_exists) - Fails if piped file name as text exists
@@ -254,9 +256,18 @@ See [CONTRIBUTING.md in the repo](https://github.com/javanile/pipetest/blob/main
 
 ## Community & Questions
 
-- [GitHub Issues](https://github.com/javanile/pipetest/issues): report a bug or raise a feature request to the `pipetest` core team
+- [GitHub Issues](https://github.com/javanile/pipetest/issues): report a bug or raise a feature request to the Pipetest core team
 - [StackOverflow Tag](https://stackoverflow.com/questions/tagged/bash+unit-testing): see existing Q&A for `BASH` and `Unit Testing`. We look at them often
 
 ## License
 
 Pipetest is open-sourced software licensed under the [MIT license](LICENSE.md).
+
+
+```shell
+
+
+ls | assert_not_empty
+
+
+```
