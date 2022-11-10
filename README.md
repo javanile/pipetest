@@ -102,7 +102,7 @@ ls | assert_empty "Current directory is not empty"
 cat apache2.log | assert_empty "Log file is not empty"
 ```
 
-<div align="right">[[back to top]](#documentation)</div>
+<div align="right"><a href="#documentation">[back to top]</a></div>
 
 <hr/>
 
