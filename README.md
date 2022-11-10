@@ -3,18 +3,8 @@
 [![Build Status](https://travis-ci.com/javanile/pipetest.svg?branch=main)](https://travis-ci.com/javanile/pipetest)
 [![License](https://img.shields.io/github/license/shellspec/shellspec.svg)](https://github.com/shellspec/shellspec/blob/master/LICENSE)
 
-[![bash](https://img.shields.io/badge/bash-&ge;2.03-lightgrey.svg?style=flat)](https://www.gnu.org/software/bash/)
-[![bosh](https://img.shields.io/badge/bosh-&ge;2018%2F10%2F07-lightgrey.svg?style=flat)](http://schilytools.sourceforge.net/bosh.html)
-[![busybox](https://img.shields.io/badge/busybox-&ge;1.20.0-lightgrey.svg?style=flat)](https://www.busybox.net/)
-[![dash](https://img.shields.io/badge/dash-&ge;0.5.4-lightgrey.svg?style=flat)](http://gondor.apana.org.au/~herbert/dash/)
-[![ksh](https://img.shields.io/badge/ksh-&ge;93s-lightgrey.svg?style=flat)](http://kornshell.org)
-[![mksh](https://img.shields.io/badge/mksh-&ge;R28-lightgrey.svg?style=flat)](http://www.mirbsd.org/mksh.htm)
-[![posh](https://img.shields.io/badge/posh-&ge;0.3.14-lightgrey.svg?style=flat)](https://salsa.debian.org/clint/posh)
-[![yash](https://img.shields.io/badge/yash-&ge;2.29-lightgrey.svg?style=flat)](https://yash.osdn.jp/)
-[![zsh](https://img.shields.io/badge/zsh-&ge;3.1.9-lightgrey.svg?style=flat)](https://www.zsh.org/)
-
-Pipetest is a simple and lightweight (but powerful) set of shell functions useful 
-to implement assertions with [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html). 
+Pipetest is a [simple and lightweight](#-pipetest "(but powerful)") set of shell functions useful
+to implement assertions with [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html).
 
 ## Why Pipetest?
 
@@ -32,6 +22,20 @@ In other words, everything that can refer to this
 ```bash
 ./build-something.sh | assert_equals "done."`
 ```
+
+## Suppoerted shell
+
+We try to do everything possible to ensure maximum compatibility with these platforms
+
+[![bash](https://img.shields.io/badge/bash-&ge;2.03-lightgrey.svg?style=flat)](https://www.gnu.org/software/bash/)
+[![bosh](https://img.shields.io/badge/bosh-&ge;2018%2F10%2F07-lightgrey.svg?style=flat)](http://schilytools.sourceforge.net/bosh.html)
+[![busybox](https://img.shields.io/badge/busybox-&ge;1.20.0-lightgrey.svg?style=flat)](https://www.busybox.net/)
+[![dash](https://img.shields.io/badge/dash-&ge;0.5.4-lightgrey.svg?style=flat)](http://gondor.apana.org.au/~herbert/dash/)
+[![ksh](https://img.shields.io/badge/ksh-&ge;93s-lightgrey.svg?style=flat)](http://kornshell.org)
+[![mksh](https://img.shields.io/badge/mksh-&ge;R28-lightgrey.svg?style=flat)](http://www.mirbsd.org/mksh.htm)
+[![posh](https://img.shields.io/badge/posh-&ge;0.3.14-lightgrey.svg?style=flat)](https://salsa.debian.org/clint/posh)
+[![yash](https://img.shields.io/badge/yash-&ge;2.29-lightgrey.svg?style=flat)](https://yash.osdn.jp/)
+[![zsh](https://img.shields.io/badge/zsh-&ge;3.1.9-lightgrey.svg?style=flat)](https://www.zsh.org/)
 
 ## Get Started
 
@@ -53,6 +57,8 @@ echo "Hello World!" | assert_equals "Hello World!"
 ```
 
 ## Documentation 
+
+There are the lists of supported functions
 
 - [**assert_empty**](#assert_empty) - Fails if piped output is not empty
 - [**assert_not_empty**](#assert_not_empty) - Fails if piped output is empty
@@ -96,7 +102,7 @@ ls | assert_empty "Current directory is not empty"
 cat apache2.log | assert_empty "Log file is not empty"
 ```
 
-[[back to top ☝]](#documentation)
+[[back to top]](#documentation)
 
 <hr/>
 
@@ -122,32 +128,7 @@ ls | assert_empty
 cat apache2.log | assert_empty
 ```
 
-<hr/>
-
-### ➡ | `assert_file_exists`
-
-**Usage**
-
-```bash
-assert_file_exists [FAIL_MESSAGE] [SUCCESS_MESSAGE]
-```
-
-**Examples**
-
-```bash
-touch sample_file.txt
-assert_file_exists sample_file.txt
-```
-
-```bash
-mv old_file_name.txt new_file_name.txt
-assert_file_exists new_file_name.txt "Moving file goes wrong."
-```
-
-```bash
-mv old_file_name.txt new_file_name.txt
-assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
-```
+[[back to top]](#documentation)
 
 <hr/>
 
@@ -176,6 +157,8 @@ mv old_file_name.txt new_file_name.txt
 assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 ```
 
+[[back to top]](#documentation)
+
 <hr/>
 
 ### ➡ | `assert_file_exists`
@@ -202,6 +185,37 @@ assert_file_exists new_file_name.txt "Moving file goes wrong."
 mv old_file_name.txt new_file_name.txt
 assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 ```
+
+[[back to top]](#documentation)
+
+<hr/>
+
+### ➡ | `assert_file_exists`
+
+**Usage**
+
+```bash
+assert_file_exists [FAIL_MESSAGE] [SUCCESS_MESSAGE]
+```
+
+**Examples**
+
+```bash
+touch sample_file.txt
+assert_file_exists sample_file.txt
+```
+
+```bash
+mv old_file_name.txt new_file_name.txt
+assert_file_exists new_file_name.txt "Moving file goes wrong."
+```
+
+```bash
+mv old_file_name.txt new_file_name.txt
+assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
+```
+
+[[back to top]](#documentation)
 
 <hr/>
 
@@ -229,6 +243,8 @@ assert_file_exists new_file_name.txt "Moving file goes wrong."
 mv old_file_name.txt new_file_name.txt
 assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 ```
+
+[[back to top]](#documentation)
 
 <hr/>
 
