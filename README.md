@@ -55,16 +55,16 @@ echo "Hello World!" | assert_equals "Hello World!"
 ## Documentation 
 
 - [**assert_empty**](#assert_empty) - Fails if piped output is not empty
-- [`assert_not_empty`](#assert_not_empty) - Fails if piped output is empty
-- [`assert_equals`](#assert_equals) - Fails if piped output not match with the argument
-- [`assert_not_equals`](#assert_not_equals) - Fails if piped output match with the argument 
-- [`assert_starts_with`](#assert_start_with) - Fails if piped output match with the argument
-- [`assert_ends_with`](#assert_ends_with) - Fails if piped output match with the argument
-- [`assert_match`](#assert_match) - Fails if piped output match with the argument
-- [`assert_file_exists`](#assert_file_exists) - Fails if piped file name as text not exists
-- [`assert_file_not_exists`](#assert_file_not_exists) - Fails if piped file name as text exists
-- [`assert_directory_exists`](#assert_directory_exists) - 
-- [`assert_directory_not_exists`](#assert_directory_not_exists)
+- [**assert_not_empty**](#assert_not_empty) - Fails if piped output is empty
+- [**assert_equals**](#assert_equals) - Fails if piped output not match with the argument
+- [**assert_not_equals**](#assert_not_equals) - Fails if piped output match with the argument 
+- [**assert_starts_with**](#assert_starts_with) - Fails if piped output match with the argument
+- [**assert_ends_with**](#assert_ends_with) - Fails if piped output match with the argument
+- [**assert_match**](#assert_match) - Fails if piped output match with the argument
+- [**assert_file_exists**](#assert_file_exists) - Fails if piped file name as text not exists
+- [**assert_file_not_exists**](#assert_file_not_exists) - Fails if piped file name as text exists
+- [**assert_directory_exists**](#assert_directory_exists) - 
+- [**assert_directory_not_exists**](#assert_directory_not_exists)
 
 <hr/>
 
@@ -74,7 +74,7 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 </div>
 
-Check if 
+Fails if piped output is not empty.
 
 **Usage**
 
@@ -85,17 +85,15 @@ Check if
 **Examples**
 
 ```bash
-## Expeting stdin is empty
 echo "" | assert_empty
 ```
 
-```bash
-## 
-ls | assert_empty "Current directory is empty"
+```bash 
+ls | assert_empty "Current directory is not empty"
 ```
 
 ```bash
-cat apache2.log | assert_empty
+cat apache2.log | assert_empty "Log file is not empty"
 ```
 
 [[back to top ☝]](#documentation)
