@@ -1,6 +1,8 @@
 # ⛲ Pipetest
 
 [![Build Status](https://travis-ci.com/javanile/pipetest.svg?branch=main)](https://travis-ci.com/javanile/pipetest)
+[![License](https://img.shields.io/github/license/shellspec/shellspec.svg)](https://github.com/shellspec/shellspec/blob/master/LICENSE)
+
 [![bash](https://img.shields.io/badge/bash-&ge;2.03-lightgrey.svg?style=flat)](https://www.gnu.org/software/bash/)
 [![bosh](https://img.shields.io/badge/bosh-&ge;2018%2F10%2F07-lightgrey.svg?style=flat)](http://schilytools.sourceforge.net/bosh.html)
 [![busybox](https://img.shields.io/badge/busybox-&ge;1.20.0-lightgrey.svg?style=flat)](https://www.busybox.net/)
@@ -10,7 +12,6 @@
 [![posh](https://img.shields.io/badge/posh-&ge;0.3.14-lightgrey.svg?style=flat)](https://salsa.debian.org/clint/posh)
 [![yash](https://img.shields.io/badge/yash-&ge;2.29-lightgrey.svg?style=flat)](https://yash.osdn.jp/)
 [![zsh](https://img.shields.io/badge/zsh-&ge;3.1.9-lightgrey.svg?style=flat)](https://www.zsh.org/)
-[![License](https://img.shields.io/github/license/shellspec/shellspec.svg)](https://github.com/shellspec/shellspec/blob/master/LICENSE)
 
 Pipetest is a simple and lightweight (but powerful) set of shell functions useful 
 to implement assertions with [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html). 
@@ -53,7 +54,7 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 ## Documentation 
 
-- [`assert_empty`](#assert_empty) - Fails if piped output is not empty
+- [**assert_empty**](#assert_empty) - Fails if piped output is not empty
 - [`assert_not_empty`](#assert_not_empty) - Fails if piped output is empty
 - [`assert_equals`](#assert_equals) - Fails if piped output not match with the argument
 - [`assert_not_equals`](#assert_not_equals) - Fails if piped output match with the argument 
