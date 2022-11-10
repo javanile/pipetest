@@ -1,7 +1,16 @@
 # ⛲ Pipetest
 
 [![Build Status](https://travis-ci.com/javanile/pipetest.svg?branch=main)](https://travis-ci.com/javanile/pipetest)
-![BASH](https://img.shields.io/badge/BASH-4%20%7C%205-lightgrey)
+[![bash](https://img.shields.io/badge/bash-&ge;2.03-lightgrey.svg?style=flat)](https://www.gnu.org/software/bash/)
+[![bosh](https://img.shields.io/badge/bosh-&ge;2018%2F10%2F07-lightgrey.svg?style=flat)](http://schilytools.sourceforge.net/bosh.html)
+[![busybox](https://img.shields.io/badge/busybox-&ge;1.20.0-lightgrey.svg?style=flat)](https://www.busybox.net/)
+[![dash](https://img.shields.io/badge/dash-&ge;0.5.4-lightgrey.svg?style=flat)](http://gondor.apana.org.au/~herbert/dash/)
+[![ksh](https://img.shields.io/badge/ksh-&ge;93s-lightgrey.svg?style=flat)](http://kornshell.org)
+[![mksh](https://img.shields.io/badge/mksh-&ge;R28-lightgrey.svg?style=flat)](http://www.mirbsd.org/mksh.htm)
+[![posh](https://img.shields.io/badge/posh-&ge;0.3.14-lightgrey.svg?style=flat)](https://salsa.debian.org/clint/posh)
+[![yash](https://img.shields.io/badge/yash-&ge;2.29-lightgrey.svg?style=flat)](https://yash.osdn.jp/)
+[![zsh](https://img.shields.io/badge/zsh-&ge;3.1.9-lightgrey.svg?style=flat)](https://www.zsh.org/)
+[![License](https://img.shields.io/github/license/shellspec/shellspec.svg)](https://github.com/shellspec/shellspec/blob/master/LICENSE)
 
 Pipetest is a simple and lightweight (but powerful) set of shell functions useful 
 to implement assertions with [I/O Redirection](https://tldp.org/LDP/abs/html/io-redirection.html). 
@@ -44,13 +53,16 @@ echo "Hello World!" | assert_equals "Hello World!"
 
 ## Documentation 
 
-- [`assert_empty`](#assert_empty) - 
-- [`assert_not_empty`](#assert_not_empty)
-- [`assert_equals`](#assert_equals)
-- [`assert_not_equals`](#assert_not_equals)
-- [`assert_file_exists`](#assert_file_exists)
-- [`assert_file_not_exists`](#assert_file_not_exists)
-- [`assert_directory_exists`](#assert_directory_exists)
+- [`assert_empty`](#assert_empty) - Fails if piped output is not empty
+- [`assert_not_empty`](#assert_not_empty) - Fails if piped output is empty
+- [`assert_equals`](#assert_equals) - Fails if piped output not match with the argument
+- [`assert_not_equals`](#assert_not_equals) - Fails if piped output match with the argument 
+- [`assert_starts_with`](#assert_start_with) - Fails if piped output match with the argument
+- [`assert_ends_with`](#assert_ends_with) - Fails if piped output match with the argument
+- [`assert_match`](#assert_match) - Fails if piped output match with the argument
+- [`assert_file_exists`](#assert_file_exists) - Fails if piped file name as text not exists
+- [`assert_file_not_exists`](#assert_file_not_exists) - Fails if piped file name as text exists
+- [`assert_directory_exists`](#assert_directory_exists) - 
 - [`assert_directory_not_exists`](#assert_directory_not_exists)
 
 <hr/>
