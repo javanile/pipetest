@@ -262,12 +262,3 @@ See [CONTRIBUTING.md in the repo](https://github.com/javanile/pipetest/blob/main
 ## License
 
 Pipetest is open-sourced software licensed under the [MIT license](LICENSE.md).
-
-
-```shell
-
-
-ls | assert_not_empty
-
-
-```
