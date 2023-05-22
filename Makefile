@@ -20,8 +20,12 @@ install-dev:
 ## =======
 ## Testing
 ## =======
+
 test:
-	@bash test/assert_equals.test.sh
+	@bash test/bare/test-runner.sh
+
+test-assert-equals:
+	@bash test/bare/assert_equals.test.sh
 
 test-assert-directory-exists:
 	@bash test/assert_directory_exists.test.sh
@@ -29,15 +33,13 @@ test-assert-directory-exists:
 test-assert-empty:
 	@bash test/assert_empty.test.sh
 
-test-assert-equals:
-	@bash test/assert_equals.test.sh
-
 test-posix:
 	@bash test/posix/test-runner.sh
 
 ## =====
 ## CI/CD
 ## =====
+
 travis-pull:
 	@docker-compose -f test/travis/docker-compose.yml pull
 

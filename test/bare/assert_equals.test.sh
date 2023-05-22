@@ -40,3 +40,5 @@ echo "A" | assert_equals "B" "FAIL" | assert_equals "FAIL in test/assert_equals.
 
 test "Custom success message on equals"
 echo "A" | assert_equals "A" "FAIL" "SUCCESS" | assert_equals "SUCCESS"
+
+echo "Test successfully"
