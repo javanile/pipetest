@@ -1,9 +1,11 @@
 
 **Description**
+
 Fails if piped output is not empty.
 
 
 **Usage**
+
 ```shell
 ... | assert_empty [FAIL_MESSAGE] [SUCCESS_MESSAGE]
 ```
