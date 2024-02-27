@@ -17,6 +17,9 @@ install-dev:
 
 #install: install-lib install-dev
 
+improve:
+	@gpte -i .
+
 ## =======
 ## Testing
 ## =======
