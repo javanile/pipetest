@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+.gpteng/
 coverage/
 .editorconfig
 lcov.sh

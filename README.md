@@ -78,7 +78,7 @@ There are the lists of supported functions
 
 <div align="center">
 
-### `assert_empty`
+### assert_empty
 
 </div>
 
@@ -108,7 +108,7 @@ cat apache2.log | assert_empty "Log file is not empty"
 
 <hr/>
 
-### `assert_not_empty`
+### assert_not_empty
 
 **Usage**
 
@@ -134,7 +134,7 @@ cat apache2.log | assert_empty
 
 <hr/>
 
-### `assert_file_exists`
+### assert_file_exists
 
 **Usage**
 
@@ -163,7 +163,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_file_exists`
+### assert_file_exists
 
 **Usage**
 
@@ -192,7 +192,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_file_exists`
+### assert_file_exists
 
 **Usage**
 
@@ -221,7 +221,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <hr/>
 
-### `assert_directory_exists`
+### assert_directory_exists
 
 **Usage**
 
