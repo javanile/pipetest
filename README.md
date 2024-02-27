@@ -161,27 +161,7 @@ assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
 
 <div align="right"><a href="#documentation">[back to top]</a></div>
 
-<hr/>
 
-### ➡ | `assert_file_exists`
-
-**Usage**
-
-```bash
-assert_file_exists [FAIL_MESSAGE] [SUCCESS_MESSAGE]
-```
-
-**Examples**
-
-```bash
-touch sample_file.txt
-assert_file_exists sample_file.txt
-```
-
-```bash
-mv old_file_name.txt new_file_name.txt
-assert_file_exists new_file_name.txt "Moving file goes wrong."
-```
 
 ```bash
 mv old_file_name.txt new_file_name.txt
@@ -207,15 +187,7 @@ touch sample_file.txt
 assert_file_exists sample_file.txt
 ```
 
-```bash
-mv old_file_name.txt new_file_name.txt
-assert_file_exists new_file_name.txt "Moving file goes wrong."
-```
 
-```bash
-mv old_file_name.txt new_file_name.txt
-assert_file_exists new_file_name.txt "Moving file goes wrong." "Ok! it working."
-```
 
 <div align="right"><a href="#documentation">[back to top]</a></div>
 
